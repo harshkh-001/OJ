@@ -1,0 +1,35 @@
+<div class="container ms-0 p-4 shadow" style="margin: 0 auto; width: 60%; background-color: #000000ff; color: #f5f5f5;">
+<p> hello its compiler</p>
+<div class="mb-3">
+  <form method="POST" action="{% url 'executes' %}">
+  {% csrf_token %}
+  <select class ="bg-dull" name="lang" >
+    <default value={{lang}}>{{lang}}</default>
+    <option value="py">Python</option>
+    <option value="cpp">C++</option>
+    <option value="c">C</option>
+  </select>
+  <textarea name="code" class="form-control bg-dark text-light" rows="20" style="font-family: 'Courier New', monospace; font-size: 14px; white-space: pre; line-height: 1.5;">{{code}}</textarea><br>
+  <label>INPUT</label>
+  <textarea name="input" class="form-control bg-black text-light" rows="2" style="font-family: 'Courier New', monospace; font-size: 14px; white-space: pre; line-height: 1.5;">{{input}}</textarea><br>
+  <label>OUTPUT</label>
+  <textarea name="output" class="form-control bg-black text-light" rows="2" style="font-family: 'Courier New', monospace; font-size: 14px; white-space: pre; line-height: 1.5;">{{output}}</textarea>
+  <input type="submit" class="btn btn-primary mt-2" name="action" value="Submit">
+  <input type="submit" class="btn btn-secondary mt-2" name="action" value="Run">
+  <input type="hidden" name="problem_id" value="{{ data.id }}">
+</form>
+</div>
+{% comment %} <div class="mb-3">
+  <form method="POST">
+    {% csrf_token %}
+    
+    <textarea name="code"
+              class="form-control bg-dark text-light p-3 rounded"
+              rows="20"
+              style="font-family: 'Courier New', monospace; font-size: 14px; white-space: pre; line-height: 1.5;">
+    </textarea>
+    
+    <button type="submit" class="btn btn-primary mt-2">Submit</button>
+  </form>
+</div> {% endcomment %}
+</div>

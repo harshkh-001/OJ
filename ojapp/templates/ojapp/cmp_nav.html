@@ -1,0 +1,46 @@
+<nav class="navbar navbar-expand-lg bg-black shadow-sm border-bottom border-secondary">
+  <div class="container-fluid">
+    
+    <!-- Brand / Logo -->
+    <a class="navbar-brand fw-bold text-light" href="/">CodePlayground</a>
+
+    <!-- Toggler for Mobile -->
+    <button class="navbar-toggler bg-light" type="button" data-bs-toggle="collapse"
+            data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown"
+            aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <!-- Nav Items -->
+    <div class="collapse navbar-collapse" id="navbarNavDropdown">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+
+        <li class="nav-item">
+          <a class="nav-link text-light" href="/ojapp/dashboard">Dashboard</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-light" href="/ojapp/problemlist">Problems</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-light" href="#">Submissions</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-light" href="/accounts/profile">Profile</a>
+        </li>
+      </ul>
+
+      <!-- Right Side: User Info + Logout -->
+      <ul class="navbar-nav mb-2 mb-lg-0">
+        <li class="nav-item">
+          <span class="navbar-text text-light me-3">
+            Logged in as <strong>{{ user.username }}</strong>
+          </span>
+        </li>
+        <li class="nav-item">
+          <a class="btn btn-sm btn-outline-danger" href="{% url 'logout' %}">Logout</a>
+        </li>
+      </ul>
+    </div>
+
+  </div>
+</nav>

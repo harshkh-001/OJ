@@ -1,0 +1,12 @@
+{% extends "./base.html" %}
+{ load slugify}
+{% block title%} problems {% endblock %}
+
+{% block content %}
+<h1 class="text-center">All Problems</h1>
+<ul>
+  {% for prob in data %}
+    <a href="problem/{{prob.name|slugify}}" class=" fs-3 text-primary">{{prob.id}}.   {{ prob.name }}</a><br><br>
+  {% endfor %}
+</ul>
+{% endblock %}
