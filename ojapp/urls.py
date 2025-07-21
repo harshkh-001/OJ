@@ -10,5 +10,7 @@ urlpatterns = [
     path('logout',views.logout_view, name='logout_view'),
     path('problemlist', views.problem_list, name='problem_list'),
     path('problem/<slug:p_name>', views.problems, name="problem"),
-    # path()
+    path('problem/<slug:p_name>/submissions', views.problem_submissions, name="p_submissions"),
+    path('submissions', views.submissions, name="submissions"),
+
 ]

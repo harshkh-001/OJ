@@ -1,0 +1,51 @@
+{% extends "ojapp/base.html" %}
+
+{% block title%}Submissions {% endblock %}
+{% block content %}
+<style>
+table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+td, th {
+  border: 1px solid #302a2aff;
+  text-align: left;
+  padding: 8px;
+}
+
+tr:nth-child(even) {
+  background-color: #d7ecf8ff;
+}
+</style>
+<div class="wait">
+    
+    
+<table border="1">
+    <tr>
+        <th>PROBLEM</th>
+        <th>Language</th>
+        <th>Submission Date</th>
+        <th>Description</th>
+        <th>Status</th>
+    </tr>
+
+    {% for x in data %}
+    <tr>
+        <td>{{ x.problem_id }}</td>
+        <td>{{ x.lang }}</td>
+        <td>{{ x.sub_time }}</td>
+        <td>{{ x.message }}</td>
+        {% if x.status %}
+            <td style="color: darkgreen;">Accepted</td>
+        {% else %}
+            <td style="color: red;">Failed</td>
+        {% endif %}
+    </tr>
+    {% endfor %}
+</table>
+
+</div>
+
+{% endblock content %}

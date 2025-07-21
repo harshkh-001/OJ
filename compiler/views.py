@@ -20,7 +20,6 @@ def executes(request):
             user = request.user
             lang = request.POST.get('lang','')
             uid = uuid.uuid4()
-            Compilers.objects.create(problem=problem, user=user, lang=lang, uuid=uid)
             
             code = request.POST.get('code','')
             code_file = rf"D:\fun\django alg\oj\oj\compilation_data\codes\{uid}.{lang}"
@@ -32,6 +31,7 @@ def executes(request):
                 compile = subprocess.run(["g++",code_file,"-o",executable], capture_output=True, text=True, timeout=50)
                 if(compile.returncode != 0):
                     err_msg = compile.stderr
+                    Compilers.objects.create(problem=problem, user=user, lang=lang, uuid=uid, message=err_msg, status=False)
                     return HttpResponse(err_msg)      # throw error for wrong code with code err message
                 
                 for file in os.listdir(p_folder):
@@ -44,8 +44,37 @@ def executes(request):
                         with open(rf"{p_folder}\output_{num}.txt") as fo:
                             file_output = fo.read()
                         if(file_output.strip() != run.stdout.strip()):
-                            return HttpResponse(f"err file : {file} \n your output : {run.stdout} \n err : {run.stderr}")
+                            message = f"err occur in Test Case {num} \n your output : {run.stdout} \n Expected Output : {file_output.strip()} \n err : {run.stderr}"
+                            Compilers.objects.create(problem=problem, user=user, lang=lang, uuid=uid, message=message, status=False)
+                            return HttpResponse(message)
+                Compilers.objects.create(problem=problem, user=user, lang=lang, uuid=uid, message="Submitted Successfully", status=True)
                 return HttpResponse("successfully submitted")
+            
+            if(lang == "py"):
+                
+                for file in os.listdir(p_folder):
+                    if(file.startswith("input_")):
+                        num = file.split('_')[1].split('.')[0]
+                        input_file_path = os.path.join(p_folder,file)
+                        with open(input_file_path, 'r') as fi:
+                            file_input = fi.read()
+                            fiarr = file_input.split()
+                            inp_str = '\n'.join(fiarr) + '\n'
+                        # run = subprocess.run([executable],input=file_input, capture_output=True, text=True,timeout=15)
+                        run = subprocess.run([sys.executable,code_file],input=inp_str, capture_output=True, text=True, timeout=5)
+                        if(run.returncode != 0):
+                            err_msg = run.stderr
+                            Compilers.objects.create(problem=problem, user=user, lang=lang, uuid=uid, message=err_msg, status=False)
+                            return HttpResponse(err_msg)  
+                        with open(rf"{p_folder}\output_{num}.txt") as fo:
+                            file_output = fo.read()
+                        if(file_output.strip() != run.stdout.strip()):
+                            message = f"err occur in Test Case {num} \n your output : {run.stdout} \n Expected Output : {file_output.strip()} \n err : {run.stderr}"
+                            Compilers.objects.create(problem=problem, user=user, lang=lang, uuid=uid, message=message, status=False)
+                            return HttpResponse(message)
+                Compilers.objects.create(problem=problem, user=user, lang=lang, uuid=uid, message="Submitted Successfully", status=True)
+                return HttpResponse("successfully submitted")
+            
             return HttpResponse("unknown error occur try again later")
         
         if(action == "Run"):
