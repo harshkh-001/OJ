@@ -16,10 +16,12 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path,include
+from ojapp import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('ojapp/', include('ojapp.urls')),
     path('accounts/', include('accounts.urls')),
     path('compiler/', include('compiler.urls')),
+    path('', views.home , name="home"),
 ]

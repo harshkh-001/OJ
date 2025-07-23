@@ -27,7 +27,7 @@ def login_view(request):
         if form.is_valid():
             user = form.get_user()
             login(request, user)  # ✅ sets session
-            return redirect('/ojapp/')  # you can customize this
+            return redirect('/')  # you can customize this
         
         else:
             messages.error(request, "Invalid username or password.")

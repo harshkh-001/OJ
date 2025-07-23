@@ -1,0 +1,56 @@
+{% extends "ojapp/base.html" %}
+{% block title %}Home Page{% endblock title %}
+{% block content %}
+
+<div class="container mt-5">
+    <div class="row align-items-center">
+        <div class="col-lg-6">
+            <h1 class="display-4 fw-bold mb-3 text-primary">Welcome to OJApp</h1>
+            <p class="lead text-dark">
+                OJApp is a free, interactive <strong>online coding platform</strong> designed especially for students and learners.
+                Practice solving exciting coding questions in our powerful <strong>Code Playground</strong>, where you can write, test, and debug your code to pass all test cases.
+            </p>
+            <p class="text-muted">
+                Our platform is perfect for building your coding skills, understanding core concepts, and preparing for interviews or competitions.
+                In the future, we plan to introduce even more exciting features to enhance your experience and make learning even easier!
+            </p>
+            <a href="{% url 'problem_list' %}" class="btn btn-primary btn-lg mt-3">
+                Try Code Playground
+            </a>
+        </div>
+        <div class="col-lg-6 text-center">
+            <img src="https://cdn.dribbble.com/users/212093/screenshots/4362939/media/98d3f05a7ecbbbc8dd26f7099ae7a1f5.gif" class="img-fluid rounded shadow" alt="Code Playground" />
+        </div>
+    </div>
+
+    <hr class="my-5">
+
+    <div class="row text-center">
+        <div class="col-md-4">
+            <div class="card h-100 shadow-sm border-0">
+                <div class="card-body">
+                    <h5 class="card-title text-success">Interactive Playground</h5>
+                    <p class="card-text">Code with real-time feedback and test against custom cases in our live coding environment.</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 mt-4 mt-md-0">
+            <div class="card h-100 shadow-sm border-0">
+                <div class="card-body">
+                    <h5 class="card-title text-info">Student Friendly</h5>
+                    <p class="card-text">Built with simplicity and learning in mind. Perfect for beginners and competitive programmers alike.</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 mt-4 mt-md-0">
+            <div class="card h-100 shadow-sm border-0">
+                <div class="card-body">
+                    <h5 class="card-title text-warning">100% Free</h5>
+                    <p class="card-text">Enjoy all features completely free of cost. No hidden fees or subscriptions ever.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock content %}

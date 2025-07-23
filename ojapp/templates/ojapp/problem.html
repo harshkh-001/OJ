@@ -1,12 +1,25 @@
 {% extends "./base.html" %}
-{ load slugify}
-{% block title%} problems {% endblock %}
+{ load slugify }
+
+{% block title %}Problems{% endblock %}
 
 {% block content %}
-<h1 class="text-center">All Problems</h1>
-<ul>
-  {% for prob in data %}
-    <a href="problem/{{prob.name|slugify}}" class=" fs-3 text-primary">{{prob.id}}.   {{ prob.name }}</a><br><br>
-  {% endfor %}
-</ul>
+
+<div class="container mt-5">
+  <h1 class="text-center mb-4 text-primary fw-bold">Browse All Problems</h1>
+
+  <div class="list-group">
+    {% for prob in data %}
+      <a href="{% url 'problems' prob.name|slugify %}" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center shadow-sm mb-2 rounded">
+        <div>
+          <span class="fs-5 fw-semibold text-dark">{{ prob.id }}. {{ prob.name }}</span>
+        </div>
+        <span class="badge bg-primary rounded-pill">Solve</span>
+      </a>
+    {% empty %}
+      <div class="alert alert-warning text-center">No problems available yet.</div>
+    {% endfor %}
+  </div>
+</div>
+
 {% endblock %}

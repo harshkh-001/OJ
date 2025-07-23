@@ -6,8 +6,15 @@ from .models import Problems
 from compiler.models import Compilers
 from django.utils.text import slugify
 # @login_required
-def index(request):
-    return HttpResponse(f"hello , welcome to oj")
+# def index(request):
+#     return HttpResponse(f"hello , welcome to oj")
+
+
+def home(request):
+    return render(request, "ojapp/home.html")
+    return HttpResponse("home page")
+
+
 
 @login_required
 def dashboard(request):
@@ -58,6 +65,12 @@ def submissions(request):
     # return HttpResponse(data)
     return render(request, "ojapp/submissions.html" , {"data":data})
     
+    
+@login_required
+def BlackBoard(request):
+    blackboard = True
+    return HttpResponse("hello its blackboard")
+
 # @login_required
 def logout_view(request):
     logout(request)
